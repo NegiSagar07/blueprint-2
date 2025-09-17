@@ -3,12 +3,12 @@ from marshmallow import ValidationError
 from ..schemas import AccountSchema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import random
-from . import db
+from .. import db
 
 account_bp = Blueprint('account_bp', __name__)
 account_schema = AccountSchema()
 
-@account_bp.route('/account')
+@account_bp.route('/create`')
 @jwt_required()
 def create_account():
 

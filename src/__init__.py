@@ -23,5 +23,11 @@ def create_app(config_class = Config):
 
     from .auth.routes import auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
+
+    from .account.routes import account_bp
+    app.register_blueprint(account_bp, url_prefix='/account')
+
+    from .transaction.routes import transaction_bp
+    app.register_blueprint(transaction_bp, url_prefix='/transaction')
     
     return app
