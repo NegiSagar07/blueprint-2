@@ -14,7 +14,7 @@ transaction_schema = TransactionSchema()
 @transaction_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_transaction():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     json_data = request.get_json()
 
     if not json_data:
@@ -39,8 +39,8 @@ def create_transaction():
         if from_account.id == to_account.id:
             return jsonify({"message" : "cannot transfer to the same account"})
         
-        if str(from_account.user_id) != user_id:
-            return jsonify({"message" : "you are not authorized to perform this transaction "})
+        if from_account.user_id != user_id:
+            return jsonify({"message" : "you are not authorized to perform this transaction ", "user_id" : from_account.user_id, "current_user" : user_id})
         
         try:
             from_account.debit_balance(amount)

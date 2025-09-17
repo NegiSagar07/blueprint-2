@@ -44,7 +44,7 @@ class Account(db.Model):
     account_num = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     account_type = db.Column(db.String(40), nullable=True)
-    balance = db.Column(db.Numeric(10, 2), nullable=False, default=0.00)
+    balance = db.Column(db.Numeric(10, 2), nullable=False, default=1000.00)
     status = db.Column(db.Enum(AccountStatus), nullable=True, default=AccountStatus.active)
 
     owner = db.relationship('User', back_populates='accounts')
@@ -64,7 +64,7 @@ class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     transaction_type = db.Column(db.String(40), nullable=False)
-    timestamp = db.Column(db.String(40), nullable=True)
+    timestamp = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
     # For transfers, both will be set.
     # For deposit, from_account_id will be NULL.
