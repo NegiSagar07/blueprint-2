@@ -3,7 +3,7 @@ from ..schemas import TransactionSchema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models import Account
 from ..models import Transaction
-from . import db
+from .. import db
 import datetime
 from marshmallow import ValidationError
 
